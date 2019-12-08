@@ -1,13 +1,28 @@
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require_relative './features/web_helper'
-
-require 'capybara/rspec'
+require 'httparty'
 require 'simplecov'
 require 'simplecov-console'
 
-# Capybara.app = 
+class TestParty
+  include HTTParty
+  base_uri "http://localhost:9292"
+
+  no_follow true   
+end
 
 RSpec.configure do |config|
+  config.before :all do
+    @server_thread = Thread.new do
+      Rack::Handler::pick(['puma']).run URLShortener.new, Port: 9292
+    end
+    begin
+      response = TestParty.get('/')
+    rescue StandardError => e
+      p 'waiting for server to start...'
+      sleep 1
+    end until response
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
