@@ -10,4 +10,8 @@ class Site
     Hash[short_url: short_url, url: url].to_json
   end
 
+  def self.find(short_url:)
+    Site.new(url: 'https://www.farmdrop.com')
+  end
+
 end

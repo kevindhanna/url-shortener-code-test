@@ -24,4 +24,11 @@ describe Site do
       expect(site.to_json).to eq({ short_url: "/farmdrop", url: "https://www.farmdrop.com" }.to_json)
     end
   end
+
+  describe '#find' do
+    it 'returns the previously created site' do
+      site = Site.find(short_url: '/farmdrop')
+      expect(site.url).to eq 'https://www.farmdrop.com'
+    end
+  end
 end

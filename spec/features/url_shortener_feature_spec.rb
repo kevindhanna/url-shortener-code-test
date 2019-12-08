@@ -60,5 +60,16 @@ describe URLShortener do
       redirect_url = response.headers['location']
       expect(redirect_url).to eq 'https://www.farmdrop.com'
     end
+
+    it 'redirects to the full URL' do
+      TestParty.post('/', 
+        :body => { url: 'https://www.google.com' }.to_json,
+        :headers => { 
+          'Content-Type' => 'application/json',
+        })
+      response = TestParty.get('/google', follow_redirects: false)
+      redirect_url = response.headers['location']
+      expect(redirect_url).to eq 'https://www.google.com'
+    end
   end
 end
