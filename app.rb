@@ -11,7 +11,9 @@ class URLShortener < Sinatra::Base
   end
 
   get "/:short_url" do
-    redirect "https://www.farmdrop.com", 301
+    short_url = "/#{params['short_url']}"
+    site = Site.find(short_url: short_url)
+    redirect site.url, 301
   end
 
 end
