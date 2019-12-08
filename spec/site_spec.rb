@@ -4,6 +4,19 @@ require 'site'
 
 describe Site do
   let(:site) { described_class.create(url: 'https://www.farmdrop.com') }
+
+  describe '#create' do
+    it 'creates an instance of the class' do
+      site = Site.create(url: 'https://www.google.com')
+      expect(site.short_url).to eq '/google'
+    end
+
+    it 'accepts urls without https://' do
+      site = Site.create(url: 'www.google.com')
+      expect(site.url).to eq 'https://www.google.com'
+    end
+  end
+
   describe '.url' do
     it 'returns the given url' do
       expect(site.url).to eq 'https://www.farmdrop.com'

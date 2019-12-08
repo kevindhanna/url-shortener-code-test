@@ -60,6 +60,23 @@ describe URLShortener do
         url: 'https://www.google.com'
       )
     end
+
+    it 'accepts urls without https://' do
+      parsed_response = TestParty.post(
+        '/',
+        body: {
+          url: 'www.farmdrop.com'
+        }.to_json,
+        headers: {
+          'Content-Type' => 'application/json'
+        }
+      ).parsed_response
+      response = JSON.parse(parsed_response, symbolize_names: true)
+      expect(response).to eq(
+        short_url: '/farmdrop',
+        url: 'https://www.farmdrop.com'
+      )
+    end
   end
 
   describe 'GET "/url"' do
