@@ -1,10 +1,13 @@
 require 'sinatra/base'
+require 'site'
 
 class URLShortener < Sinatra::Base
 
   post '/' do
+    parsed_params = JSON.parse(request.body.read, symbolize_names: true)
+    site = Site.new(parsed_params)
     status 201
-    { short_url: "/farmdrop", url: "http://www.farmdrop.com" }.to_json
+    site.to_json
   end
 
 end

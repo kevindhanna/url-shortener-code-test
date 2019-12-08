@@ -10,11 +10,11 @@ describe URLShortener do
       sleep 1
     end until response
   end
-  
+
   describe "POST '/'" do
     it 'returns 201 Created' do
       response = TestParty.post('/', 
-        :body => { url: 'http://www.farmdrop.com' }.to_json,
+        :body => { url: 'https://www.farmdrop.com' }.to_json,
         :headers => { 
           'Content-Type' => 'application/json',
         })
@@ -23,22 +23,22 @@ describe URLShortener do
     
     it 'returns a JSON containing the created shortened URL' do
       parsed_response = TestParty.post('/', 
-        :body => { url: 'http://www.farmdrop.com' }.to_json,
+        :body => { url: 'https://www.farmdrop.com' }.to_json,
         :headers => { 
           'Content-Type' => 'application/json',
         }).parsed_response
       response = JSON.parse(parsed_response, symbolize_names: true)
-      expect(response).to eq({ short_url: "/farmdrop", url: "http://www.farmdrop.com" })
+      expect(response).to eq({ short_url: "/farmdrop", url: "https://www.farmdrop.com" })
     end
 
     it 'returns a JSON containing the created shortened URL' do
       parsed_response = TestParty.post('/', 
-        :body => { url: 'http://www.google.com' }.to_json,
+        :body => { url: 'https://www.google.com' }.to_json,
         :headers => { 
           'Content-Type' => 'application/json',
         }).parsed_response
       response = JSON.parse(parsed_response, symbolize_names: true)
-      expect(response).to eq({ short_url: "/google", url: "http://www.google.com" })
+      expect(response).to eq({ short_url: "/google", url: "https://www.google.com" })
     end
   end
 end

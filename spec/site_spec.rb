@@ -16,6 +16,13 @@ describe Site do
     it 'returns a shortened version of the url' do
       site = Site.new(url: 'https://www.google.com')
       expect(site.short_url).to eq '/google'
+      p site
+    end
+  end
+
+  describe '.to_json' do
+    it 'returns the url and short_url in a json object' do
+      expect(site.to_json).to eq({ short_url: "/farmdrop", url: "https://www.farmdrop.com" }.to_json)
     end
   end
 end
