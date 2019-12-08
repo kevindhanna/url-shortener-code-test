@@ -1,7 +1,7 @@
 require 'site'
 
 describe Site do
-  let(:site) { described_class.new(url: 'https://www.farmdrop.com') }
+  let(:site) { described_class.create(url: 'https://www.farmdrop.com') }
   describe '.url' do
     it 'returns the given url' do
       expect(site.url).to eq 'https://www.farmdrop.com'
@@ -14,7 +14,7 @@ describe Site do
     end
 
     it 'returns a shortened version of the url' do
-      site = Site.new(url: 'https://www.google.com')
+      site = Site.create(url: 'https://www.google.com')
       expect(site.short_url).to eq '/google'
     end
   end
@@ -26,9 +26,14 @@ describe Site do
   end
 
   describe '#find' do
-    it 'returns the previously created site' do
+    it 'returns the previously create site' do
       site = Site.find(short_url: '/farmdrop')
       expect(site.url).to eq 'https://www.farmdrop.com'
+    end
+
+    it 'returns the previously create site' do
+      site = Site.create(url: 'https://www.google.com')
+      expect(Site.find(short_url: '/google').url).to eq 'https://www.google.com'
     end
   end
 end
