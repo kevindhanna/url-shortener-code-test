@@ -16,7 +16,6 @@ describe Site do
     it 'returns a shortened version of the url' do
       site = Site.new(url: 'https://www.google.com')
       expect(site.short_url).to eq '/google'
-      p site
     end
   end
 

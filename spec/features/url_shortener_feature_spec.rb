@@ -41,4 +41,18 @@ describe URLShortener do
       expect(response).to eq({ short_url: "/google", url: "https://www.google.com" })
     end
   end
+
+  describe 'GET "/url"' do
+    before :all do
+      TestParty.post('/', 
+        :body => { url: 'https://www.farmdrop.com' }.to_json,
+        :headers => { 
+          'Content-Type' => 'application/json',
+        })
+    end
+    it 'returns 301 Permanently Moved' do
+      response = TestParty.get('/farmdrop')
+      expect(response.code).to eq 301
+    end
+  end
 end

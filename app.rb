@@ -10,4 +10,8 @@ class URLShortener < Sinatra::Base
     site.to_json
   end
 
+  get "/:short_url" do
+    status 301
+  end
+
 end
