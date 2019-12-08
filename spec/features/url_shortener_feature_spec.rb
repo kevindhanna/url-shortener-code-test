@@ -18,5 +18,15 @@ describe URLShortener do
       response = JSON.parse(parsed_response, symbolize_names: true)
       expect(response).to eq({ short_url: "/farmdrop", url: "http://www.farmdrop.com" })
     end
+
+    it 'returns a JSON containing the created shortened URL' do
+      parsed_response = TestParty.post('/', 
+        :body => { url: 'http://www.google.com' }.to_json,
+        :headers => { 
+          'Content-Type' => 'application/json',
+        }).parsed_response
+      response = JSON.parse(parsed_response, symbolize_names: true)
+      expect(response).to eq({ short_url: "/google", url: "http://www.google.com" })
+    end
   end
 end
