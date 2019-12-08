@@ -6,7 +6,7 @@ class Site
   end
 
   def short_url
-    '/farmdrop'
+    "/#{url.split('.')[1]}"
   end
 
 end
