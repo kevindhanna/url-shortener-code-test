@@ -6,7 +6,7 @@ class Site
   attr_reader :url, :short_url
 
   def self.create(url:)
-    url = self.prefix(url)
+    url = prefix(url)
     site = Site.new(url: url)
     @storage[site.short_url] = url
     site
@@ -20,18 +20,16 @@ class Site
     Site.new(url: @storage[short_url])
   end
 
+  def self.prefix(url)
+    url = "https://#{url}" if url[0..7] != 'https://' && url[0..6] != 'http://'
+
+    url
+  end
+
   private
 
   def initialize(url:)
     @url = url
     @short_url = "/#{url.split('.')[1]}"
-  end
-
-  def self.prefix(url)
-    if url[0..7] != 'https://' && url[0..6] != 'http://'
-      url = "https://" + url
-    end
-
-    url
   end
 end
