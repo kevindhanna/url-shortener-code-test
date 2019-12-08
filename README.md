@@ -31,6 +31,10 @@ requires Ruby `~> 2.6.3`
 Create a new shortened URL:
 - run `curl localhost:4000 -XPOST -d '{ "url": "https://www.google.com" }'`  
   => `{"short_url":"/google","url":"https://www.google.com"}`
+  
+Create a new shortened URL without 'https://':
+- run `curl localhost:4000 -XPOST -d '{ "url": "www.farmdrop.com" }'`  
+  => `{"short_url":"/farmdrop","url":"https://www.farmdrop.com"}`
 
 Visit the shortened URL:
 - run `curl -v localhost:4000/google`  
