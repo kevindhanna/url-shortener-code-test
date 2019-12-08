@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require "bundler/setup"
 require 'sinatra/base'
 require './lib/site'
 
 class URLShortener < Sinatra::Base
+  set :bind, '0.0.0.0'
+
   post '/' do
     parsed_params = JSON.parse(request.body.read, symbolize_names: true)
     return status 400 if parsed_params[:url].length.zero?
