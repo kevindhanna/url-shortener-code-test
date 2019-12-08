@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Site
   @storage = {}
 
@@ -9,7 +11,7 @@ class Site
     site
   end
 
-  def to_json
+  def to_json(*_args)
     Hash[short_url: short_url, url: url].to_json
   end
 
@@ -23,5 +25,4 @@ class Site
     @url = url
     @short_url = "/#{url.split('.')[1]}"
   end
-  
 end

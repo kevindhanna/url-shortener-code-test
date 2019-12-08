@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'site'
 
 describe Site do
@@ -21,7 +23,10 @@ describe Site do
 
   describe '.to_json' do
     it 'returns the url and short_url in a json object' do
-      expect(site.to_json).to eq({ short_url: "/farmdrop", url: "https://www.farmdrop.com" }.to_json)
+      expect(site.to_json).to eq({
+        short_url: '/farmdrop',
+        url: 'https://www.farmdrop.com'
+      }.to_json)
     end
   end
 
@@ -32,7 +37,7 @@ describe Site do
     end
 
     it 'returns the previously create site' do
-      site = Site.create(url: 'https://www.google.com')
+      Site.create(url: 'https://www.google.com')
       expect(Site.find(short_url: '/google').url).to eq 'https://www.google.com'
     end
   end
