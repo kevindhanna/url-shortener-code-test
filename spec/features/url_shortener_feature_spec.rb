@@ -51,8 +51,14 @@ describe URLShortener do
         })
     end
     it 'returns 301 Permanently Moved' do
-      response = TestParty.get('/farmdrop')
+      response = TestParty.get('/farmdrop', follow_redirects: false)
       expect(response.code).to eq 301
+    end
+
+    it 'redirects to the full URL' do
+      response = TestParty.get('/farmdrop', follow_redirects: false)
+      redirect_url = response.headers['location']
+      expect(redirect_url).to eq 'https://www.farmdrop.com'
     end
   end
 end

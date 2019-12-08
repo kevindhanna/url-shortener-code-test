@@ -11,7 +11,7 @@ class URLShortener < Sinatra::Base
   end
 
   get "/:short_url" do
-    status 301
+    redirect "https://www.farmdrop.com", 301
   end
 
 end
