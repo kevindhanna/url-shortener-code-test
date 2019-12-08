@@ -29,11 +29,11 @@ requires Ruby `~> 2.6.3`
 ## How to use
   
 Create a new shortened URL:
-- run `curl localhost:4000 -XPOST -d '{ "url": "https://www.google.com" }'`
+- run `curl localhost:4000 -XPOST -d '{ "url": "https://www.google.com" }'`  
   => `{"short_url":"/google","url":"https://www.google.com"}`
 
 Visit the shortened URL:
-- run `curl -v localhost:4000/google`
+- run `curl -v localhost:4000/google`  
   => 
   ```
   ...
