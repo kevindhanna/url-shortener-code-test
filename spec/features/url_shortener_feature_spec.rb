@@ -77,6 +77,19 @@ describe URLShortener do
         url: 'https://www.farmdrop.com'
       )
     end
+
+    it 'returns invalid request for empty urls' do
+      response = TestParty.post(
+        '/',
+        body: {
+          url: ''
+        }.to_json,
+        headers: {
+          'Content-Type' => 'application/json'
+        }
+      )
+      expect(response.code).to eq 400
+    end
   end
 
   describe 'GET "/url"' do
@@ -111,6 +124,11 @@ describe URLShortener do
       response = TestParty.get('/google', follow_redirects: false)
       redirect_url = response.headers['location']
       expect(redirect_url).to eq 'https://www.google.com'
+    end
+
+    it 'returns invalid request for urls that havent been shortened' do
+      response = TestParty.get('/test', follow_redirects: false)
+      expect(response.code).to eq 400
     end
   end
 end
