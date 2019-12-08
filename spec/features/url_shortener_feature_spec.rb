@@ -1,4 +1,16 @@
 describe URLShortener do
+  before :all do 
+    @server_thread = Thread.new do
+      Rack::Handler::pick(['puma']).run URLShortener.new, Port: 9292
+    end
+    begin
+      response = TestParty.get('/')
+    rescue StandardError => e
+      p 'waiting for server to start...'
+      sleep 1
+    end until response
+  end
+  
   describe "POST '/'" do
     it 'returns 201 Created' do
       response = TestParty.post('/', 

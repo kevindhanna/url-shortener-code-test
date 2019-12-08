@@ -7,4 +7,10 @@ describe Site do
       expect(site.url).to eq 'https://www.farmdrop.com'
     end
   end
+
+  describe '.short_url' do
+    it 'returns a shortened version of the url' do
+      expect(site.short_url).to eq '/farmdrop'
+    end
+  end
 end

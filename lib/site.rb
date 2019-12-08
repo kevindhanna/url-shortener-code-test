@@ -4,5 +4,9 @@ class Site
   def initialize(url:)
     @url = url
   end
-  
+
+  def short_url
+    '/farmdrop'
+  end
+
 end
